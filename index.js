@@ -32,7 +32,7 @@ app.post("/canciones", async (req, res) => {
             console.log("Cancion agregada Exitosamente!")
         }
     } catch (error) {
-        console.log("No se puede agregar la cancion solicitada");
+        res.json({ message: "No se puede agregar la cancion solicitada" });
     }
 
 })
