@@ -29,7 +29,7 @@ app.post("/canciones", async (req, res) => {
             canciones.push(cancion)
             await fsPromises.writeFile("canciones.json", JSON.stringify(canciones))
             res.send("¡¡Cancion agregada Exitosamente!!")
-            console.log("Cancion agregada Exitosamente")
+            console.log("Cancion agregada Exitosamente!")
         }
     } catch (error) {
         console.log("Ha ocurrido un error");
