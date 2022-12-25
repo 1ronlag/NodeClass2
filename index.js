@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 //Agregar Canciones//
 app.post("/canciones", async (req, res) => {
     try {
-        if (req.body.titulo === "" || req.body.artista === "" || req.body.tono === "") {
+        if (req.body.cancion === "" || req.body.artista === "" || req.body.tono === "") {
             res.send("Favor completa todos los campos");
             console.log("Favor completa todos los campos")
         } else {
@@ -37,3 +37,14 @@ app.post("/canciones", async (req, res) => {
 
 })
 
+//Borrar Canciones//
+app.delete("/canciones/:id", async (req, res) => {
+    const { id } = req.params
+    const canciones = JSON.parse(await fsPromises.readFile("canciones.json"))
+    const index = canciones.findIndex(p => p.id == id)
+    canciones.splice(index, 1)
+    await fsPromises.writeFile("canciones.json", JSON.stringify(canciones))
+    res.send("Canción eliminada Exitosamente")
+    console.log("Canción Eliminada Exitosamente!")
+
+})
