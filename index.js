@@ -48,3 +48,16 @@ app.delete("/canciones/:id", async (req, res) => {
     console.log("Canción Eliminada Exitosamente!")
 
 })
+
+//Modificar Cancion//
+app.put("/canciones/:id", async (req, res) => {
+    const { id } = req.params
+    const cancion = req.body
+    const canciones = JSON.parse(await fsPromises.readFile("canciones.json"))
+    const index = canciones.findIndex(p => p.id == id)
+    canciones[index] = cancion
+    await fsPromises.writeFile("canciones.json", JSON.stringify(canciones))
+    res.send("Canción modificada con Éxito")
+    console.log("Canción modificada con Éxito")
+
+})
